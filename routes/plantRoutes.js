@@ -1,6 +1,6 @@
 import {getPlants} from '../controllers/plantController';
 
-const routes = (app) => {
+const plantRoutes = (app) => {
     app.route('/plants')
     .get((req, res, next) => {
         // middleware
@@ -12,4 +12,4 @@ const routes = (app) => {
 
 
 
-export default routes;
+export default plantRoutes;

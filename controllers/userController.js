@@ -3,33 +3,49 @@ import {UserSchema} from '../models/userModel'
 var bcrypt = require('bcryptjs');
 const User = mongoose.model('user', UserSchema);
 
-
-export const addNewUser =(req, res)=>{
-	let user= new User({
-		username: req.body.user.username,
-		email: req.body.user.email,
-		firstname: req.body.user.firstname,
-	  lastname: req.body.user.lastname,
-		passhash:bcrypt.hashSync(req.body.user.pwd, 10),
-		plotHeight:2,
-		plotWidth:4
-	})
-	user.save().then(
-		(newUser)=>{
-			res.json({
-			user:newUser,
-			message:'successful'
-			})
-		})
-	})
+export const getUsers = (req,res)=>{
+	 User.find({} ,(err, user)=>{
+ 	  if(err){
+ 	  	res.send('error has occured')
+ 	  }
+ 	  console.log(user);
+ 	  res.json(user);
+ 	})
 }
 
+
+
 export const getUserById = (req,res)=>{
-	(User.findById(req.params.userId, (err,user))=>{
+	User.findById(req.params.userId, (err,user)=>{
 		if(err){
 			res.send(err);
 		}
 		res.json(user);
+	})
+}
+
+export const addNewUser =(req, res)=>{
+
+	console.log(req.body)
+	let newUser= new User({
+		username: req.body.username,
+		email: req.body.email,
+		firstname: req.body.firstname,
+	  lastname: req.body.lastname,
+		passhash:bcrypt.hashSync(req.body.pwd, 10),
+	})
+	
+	newUser.save(
+		(newUser,err)=>{
+			if(err){
+				throw err;
+			}
+			else{
+				res.json({
+					user:newUser,
+					message:'successful'
+				})
+			}
 	})
 
 }
