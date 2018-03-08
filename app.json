@@ -1,0 +1,6 @@
+{
+	"name": "PlantingPalsAPI",
+	"description":"API made in Node, express and mongodb",
+	"repository":"https://github.com/acdickin/plantapi",
+	"keywords":["node","express","mongodb"]
+}
