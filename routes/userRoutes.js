@@ -1,24 +1,27 @@
-import {addNewUser, getUserById,  getUsers} from '../controllers/userController';
+'use strict';
 
-const userRoutes = (app) => {
- app.route('/user')
-	.post(addNewUser);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _userController = require('../controllers/userController');
 
-// app.route('/user/:userId')
-// 	.get((req,res)=>{
-// 		  console.log(`Request from: ${req.originalUrl}`)
-//       console.log(`Request type: ${req.method}`)
-//       next();
-//   }, getUserById);
-// }
+var userRoutes = function userRoutes(app) {
+  app.route('/user').post(_userController.addNewUser);
 
-	app.route('/users')
-	  .get((req, res, next) => {
-        // middleware
-        console.log(`Request from: ${req.originalUrl}`)
-        console.log(`Request type: ${req.method}`)
-        next();
-    }, getUsers);
-}
-export default userRoutes;
+  // app.route('/user/:userId')
+  // 	.get((req,res)=>{
+  // 		  console.log(`Request from: ${req.originalUrl}`)
+  //       console.log(`Request type: ${req.method}`)
+  //       next();
+  //   }, getUserById);
+  // }
+
+  app.route('/users').get(function (req, res, next) {
+    // middleware
+    console.log('Request from: ' + req.originalUrl);
+    console.log('Request type: ' + req.method);
+    next();
+  }, _userController.getUsers);
+};
+exports.default = userRoutes;
