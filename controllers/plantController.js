@@ -5,7 +5,9 @@ const Plant = mongoose.model('plant', PlantSchema);
 
 export const getPlants = (req,res)=>{
   Plant.find({} ,(err, plant)=>{
+
  	  if(err){
+ 	  	console.log(err)
  	  	res.send('error has occured')
  	  }
  	  console.log(plant);
